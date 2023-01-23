@@ -72,9 +72,9 @@ object RevokeGuildMsg : CommonSwitchFunctionHook(SyncUtils.PROC_MAIN or SyncUtil
                     Class::class.java
                 )?.invoke("getSelfTinyId")
 
-                val revokerNick = getNickName(appRuntime, operatorId, msgRecord)
-                val authorNick = getNickName(appRuntime, senderUin, msgRecord)
-                val msg = MsgRecordData(msgRecord).msg
+                val revokerNick = getNickName(appRuntime, operatorId, messageRecord)
+                val authorNick = getNickName(appRuntime, senderUin, messageRecord)
+                val msg = MsgRecordData(messageRecord).msg
                 val greyMsg = if (senderUin == operatorId) {
                     "\"$revokerNick\u202d\" 尝试撤回一条消息: $msg "
                 } else {
@@ -87,7 +87,7 @@ object RevokeGuildMsg : CommonSwitchFunctionHook(SyncUtils.PROC_MAIN or SyncUtil
                 )
                 thisObject.invoke(
                     "addGreyTipsForDeletedMsg",
-                    msgRecord, event,
+                    messageRecord, event,
                     _MessageRecord(), event.javaClass
                 )
 
